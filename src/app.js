@@ -17,7 +17,12 @@ mongoose.connect(process.env.MONGO_URI)
 app.get('/', (req, res) => {
     res.send('Student API is running!');
 });
-
+app.get('/health', (req, res) => {
+    res.status(200).json({
+        status: 'ok',
+        uptime: process.uptime()
+    });
+});
 app.use('/students', studentsRouter);
 
 const PORT = process.env.PORT || 3000;
